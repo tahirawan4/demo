@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Submitted At</th>
+            <th>Notes</th>
+            <th>Link</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for submission in assignment_submissions %}
+
+            <tr>
+                <td>{{ submission.user_name }}</td>
+                <td>{{ submission.submit_time }}</td>
+                <td>{{ submission.notes }}</td>
+                <td>{{ submission.link }}</td>
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %} {% endblock %}Home</title>
+    <!-- Bootstrap -->
+    <link href='{% static "bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+    <link href='{% static "default.css" %}' rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1>LMS</h1>
+    </div>
+    {#    <nav class="navbar navbar-default">#}
+    {#        <div class="container-fluid">#}
+    {#            <div class="navbar-header">#}
+    {#                <a class="navbar-brand" href="{% url 'index' %}">Demo App</a>#}
+    {#            </div>#}
+    {#            <ul class="nav navbar-nav">#}
+    {#                <li class={% if page == 'home' %}"active"{% else %}{% endif %}><a href="{% url 'index' %}">Home</a></li>#}
+    {#                <li class={% if page == 'about' %}"active"{% else %}{% endif %}><a href="{% url 'about' %}">About</a>#}
+    {#                </li>#}
+    {#                <li class={% if page == 'contact' %}"active"{% else %}{% endif %}><a href="{% url 'contact' %}">Contact#}
+    {#                    Us</a></li>#}
+    {#            </ul>#}
+    {#        </div>#}
+    {#    </nav>#}
+
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="sidebar-nav">
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".sidebar-navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <span class="visible-xs navbar-brand">Sidebar menu</span>
+                    </div>
+                    <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                        <ul class="nav navbar-nav">
+
+
+                            <li><a href="#">Profile</a></li>
+                            {% if user == 'student' %}
+                                <li {% if page == 'courses' %}class="active"{% endif %}><a
+                                        href="{% url 'course-list' %}">Courses</a>
+                                </li>
+                                <li><a href="#">Notifications</a></li>
+                            {% else %}
+                                <li {% if page == 'courses' %}class="active"{% endif %}><a
+                                        href="{% url 'teacher-course-list' %}">Courses</a>
+                                </li>
+                                <li {% if page == 'assignment' %}class="active"{% endif %}><a href="{% url 'assignments-list' %}">Assignments</a>
+                                </li>
+                                <li><a href="#">Quizes</a></li>
+                                <li><a href="#">Notifications</a></li>
+                            {% endif %}
+
+
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src='{% static "bootstrap/js/bootstrap.min.js" %}'></script>
+
+</body>
+</html>

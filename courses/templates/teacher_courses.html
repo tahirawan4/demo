@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for course in courses %}
+
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-default"><span class="label label-default"
+                                                                      style="font-size: 18px;">{{ course.title }}</span>
+
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-warning">
+                        <a href="#">
+                            <span class="label label-info" style="font-size: 13px;">Attendence</span>
+                        </a>
+
+                    </li>
+
+                    <li class="list-group-item list-group-item-success">
+
+                        <a data-toggle="collapse" href="#grade_data{{ course.id }}" aria-expanded="false"
+                           aria-controls="grade_data{{ course.id }}">
+                            <span class="label label-info" style="font-size: 13px;">Course Work</span>
+                        </a>
+
+                        {% include 'course_assignment_section.html' %}
+
+
+                    </li>
+
+                </ul>
+            </li>
+        </ul>
+    {% endfor %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,60 @@
+<div class="collapse" id="grade_data{{ course.id }}">
+    <div class="card card-block">
+        <br>
+        <ul class="list-group">
+            {% if course.assignments %}
+                <li class="list-group-item active">Assignments</li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="text-muted" style="font-size: 16px;">Title</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="text-muted" style="font-size: 16px;">Due Date</span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <span class="text-muted" style="font-size: 16px;">Status</span>
+                        </div>
+                    </div>
+
+
+                </li>
+
+
+            {% endif %}
+
+            {% for assignment in course.assignments %}
+
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="text-muted">{{ assignment.title }}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="text-muted">{{ assignment.due_date }}</span>
+                        </div>
+
+                        <div class="col-md-4">
+                            {% if not assignment.submitted and assignment.expired %}
+                                <span class="label label-danger">Expired</span>
+                            {% elif assignment.submitted %}
+                                <span class="label label-success">Submitted</span>
+                            {% else %}
+                                <span class="label label-primary">Not Submitted</span>
+                                <a href="{% url 'assignment-submission' assignment_id=assignment.id %}"
+                                   class="btn btn-success" role="button">Submit</a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+
+                </li>
+
+
+            {% endfor %}
+        </ul>
+
+    </div>
+</div>
